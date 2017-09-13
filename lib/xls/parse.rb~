@@ -1,0 +1,75 @@
+require 'roo'
+require 'roo-xls'
+
+module Xls
+  class Parse
+
+    attr_reader :file
+    
+    def initialize(ps)
+      @file = ps[:file]
+    end
+    
+    def load
+      Roo::Spreadsheet.open(file)
+    end
+
+    def sheet
+      load.sheet(0)
+    end
+
+    # keys of level1
+    def row1
+      sheet.row(1)
+    end
+
+    def row1_dup_nil
+      
+      while !(dup_nil.any? {|item| item.nil?}) do
+        result = dup_nil
+      end
+      result
+    end
+
+    def dup_nil(row)
+      row1.each_with_index.map do |item, index|
+        if index != (row1.count) - 1 # not last item
+          item || item = row1[index - 1]
+        end
+      end
+    end
+
+    # some child of level1
+    def row2
+      sheet.row(2)
+    end 
+    
+    def row2_values
+      arr = []
+      3.upto(sheet.last_row) do |i|
+        rowv = sheet.row(i)
+        arr << match_value(row2, rowv)
+      end
+      arr
+    end
+
+    def match_value(ka, va)
+      arr = []
+      ka.each_with_index do |item, index|
+        c = item ? {item => va[index]} : va[index]
+        arr << c
+      end
+      arr
+    end
+
+
+    
+    def result
+      merge_value()
+    end
+
+
+
+
+  end
+end

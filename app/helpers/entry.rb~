@@ -1,0 +1,41 @@
+# coding: utf-8
+class Entry
+
+  attr_reader :result, :entry, :form, :form_name, :file_pair
+  
+  # hd=hash_data
+  def initialize(result) 
+    @result = result
+    @entry = result.entry
+    @form = result.form
+    @form_name = result.form_name
+    @file_pair = XmlFactory.new.name_pair
+  end
+
+  def values
+    change_name
+  end
+
+  def change_name
+    mem = {}
+    # inject not work
+    filter_entry.each do |h|
+      # become ["serial_number", 123]
+      hk, hv = h
+      rel_name = file_pair[hk] 
+      mem[rel_name] = hv
+    end
+    mem
+  end
+
+  # 对应不上最新field name的则不显示
+  def filter_entry
+    entry_toh.select {|k, _| file_pair.keys.include?(k)}
+  end
+
+  def entry_toh
+    JSON.parse entry.gsub('=>', ':')
+  end
+
+
+end

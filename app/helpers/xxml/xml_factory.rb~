@@ -1,0 +1,45 @@
+# coding: utf-8
+class XmlFactory
+  attr_reader :file_name, :path
+  def initialize(ps = {})
+    @file_name = 'form_v9KUmP'
+    @path = ps[:path] || Rails.root.join( 'app', 'lib', file_name)
+  end
+
+  #getting {"serial_number"=>"序号", ...}
+  def name_pair
+    hash = {}
+    reverse_arr.each {|arr| hash[arr[0]] = arr[1]}
+    # .inject({}) {|mem, arr| mem["#{arr[0]}"] = arr[1] }
+    hash
+  end
+
+
+  
+  def reverse_arr
+    delete_center.map {|arr| arr.reverse}
+  end
+  # ["序号", "Float", "serial_number"] > ["序号", "serial_number"]
+  def delete_center
+    # delete change the source
+    td_arr.each {|td| td.delete_at(1)}
+    # .inject([]) {|mem,h| mem << h["td"].delete_at(1) && h["td"]}
+  end
+
+  def td_arr
+    to_h.map {|h| h["td"]}    
+  end
+  
+  # <tbody> data
+  def xml_data
+    data = ""
+    File.read(path).each_line {|line| data << line.chomp}
+    data
+  end
+
+  # get tds hash[{"td"=>["序号", "Float", "serial_number"]}, {"td"=>["总价", "Float", "total_price"]}]
+  def to_h
+    h = Hash.from_xml(xml_data)
+    h.dig("tbody","tr")
+  end
+end

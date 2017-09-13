@@ -1,0 +1,29 @@
+// Place all the styles related to the results controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+dl.detail{
+    dt{
+	font-weight: normal;
+	font-size: 1.167em;
+	padding-top: 8px;
+	padding-bottom: 1px;
+    }
+    dd {
+	a {
+	    color: #545454;
+	}
+	padding-bottom: 8px;
+	font-size: 1em;
+	border-bottom: 1px solid #E9E9E9;
+	line-height: 26px;
+	// min-height:26px;
+	word-wrap: break-word;
+	overflow-x: auto;
+    }
+}
+
+dd {
+    margin-left: 0;
+}

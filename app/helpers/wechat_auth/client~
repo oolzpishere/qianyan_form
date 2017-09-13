@@ -1,0 +1,18 @@
+module WechatAuth
+  class Client
+
+    attr_reader :code, :uri
+    
+    def initialize( ps = {} )
+      @code = ps[:code] unless ps[:code].nil?
+      @uri = ps[:uri] || WechatAuth::Oauth.get_openid_uri(code)
+    end
+
+
+    def response
+      Net::HTTP.get_response(uri)
+    end
+
+
+  end
+end

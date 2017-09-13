@@ -1,0 +1,22 @@
+# coding: utf-8
+require 'rails_helper'
+
+RSpec.describe Xls::Parse do
+  before(:example) do
+    file_name = File.join(File.expand_path("../files", __FILE__), 'v9KUmP_小学英语会议报名_20170817162821.xls')
+    @parse = Xls::Parse.new(file: file_name)
+  end
+  
+  it "load file success, class == Roo::Excel" do
+
+    expect(@parse.load).to be_an_instance_of(Roo::Excel)
+  end
+
+  it "have sheets" do
+    byebug
+  end
+
+
+end
+
+

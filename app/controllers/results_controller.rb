@@ -1,0 +1,126 @@
+class ResultsController < ApplicationController
+  before_action :set_result, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate, except: [:show, :index, :create]
+  before_action :authenticate, only: [:create], if: Proc.new { |c| c.request.format != 'application/json'}
+  # before_action :json_create_restirct_access, only: [:create], if: Proc.new { |c| c.request.format = 'application/json'}
+  # test post json have my pass token
+  # before_action :pass, if: Proc.new { |c| c.request.format = 'application/json'}
+  before_action :subject_class, only: [:index, :show, :create]
+  USERS = { ENV["QIANYAN_FORM_USER"] => ENV["QIANYAN_FORM_SE"] }
+  
+  # GET /results
+  # GET /results.json
+  def index
+    # subjects = %w( english math )
+    
+    # constantize(type).order(id: :desc).all if subjects.include?(subject)
+    @results = subject_class.order(id: :desc).all
+    # @results = Result.order(id: :desc).all
+    @openid_results = @results#.select {|result| result.openid == session[:openid]}
+  end
+
+  # GET /results/1
+  # GET /results/1.json
+  def show
+  end
+
+  # GET /results/new
+  def new
+    @result = Result.new
+  end
+
+  # GET /results/1/edit
+  def edit
+  end
+
+  # POST /results
+  # POST /results.json
+  def create
+    # like: http://localhost:3000/results?pass=ENV["QIANYAN_FORM_PASS"]
+    unless params[:pass] == ENV["QIANYAN_FORM_PASS"]
+      return render json: {'fail':'need pass'}.to_json, status: :bad_request 
+    end
+    
+    h = {
+      "id" => result_params.dig(:entry, :serial_number) ||  result_params[:id],
+      "openid" => result_params.dig(:entry, :x_field_weixin_openid) || result_params[:openid],
+      "gen_code" => result_params.dig(:entry, :gen_code) || result_params[:gen_code]
+    }
+    
+    # @result = Result.new(result_params.merge h)
+    
+    # subject_pluralize = subject.pluralize
+    # @result = Result.find(subject).send(subject_pluralize).new(result_params.merge h)
+    @result = subject_class.new(result_params.merge h)
+    
+    respond_to do |format|
+      if @result.save
+        format.html { redirect_to @result, notice: 'Result was successfully created.' }
+        format.json { render json: "", status: :ok}
+      # format.json { render :show, status: :created, location: @result }
+      else
+        format.html { render :new }
+        format.json { render json: @result.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /results/1
+  # PATCH/PUT /results/1.json
+  def update
+    respond_to do |format|
+      if @result.update(result_params)
+        format.html { redirect_to @result, notice: 'Result was successfully updated.' }
+        format.json { render :show, status: :ok, location: @result }
+      else
+        format.html { render :edit }
+        format.json { render json: @result.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /results/1
+  # DELETE /results/1.json
+  def destroy
+    @result.destroy
+    respond_to do |format|
+      format.html { redirect_to results_url, notice: 'Result was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_result
+    # @result = Result.find(params[:id])
+    @result = subject_class(params[:id])
+  end
+
+  def subject_class
+    subject = params[:subject]
+    subject.constantize
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def result_params
+    # permit :openid, :gen_code for save it directly
+    params.fetch(:result, {}).permit(:id, :form, :form_name, :openid, :gen_code, :entry => {})
+  end
+
+  def authenticate
+    authenticate_or_request_with_http_digest do |username|
+      USERS[username]
+    end
+  end
+
+  def json_create_restirct_access
+    
+  end
+
+  # def pass
+  #   byebug
+  #   # format.json { render json: "", status: :unprocessable_entity }
+  #   return 1 unless params[:pass] == "6mVjeZGmWni4rrbWZy5kJynwsiLzKN5q"
+  # end
+
+end

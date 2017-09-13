@@ -1,0 +1,2 @@
+class PrimaryEnglishResult < ApplicationRecord
+end

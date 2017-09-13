@@ -1,0 +1,30 @@
+# coding: utf-8
+
+module Xls
+  class Post
+
+    attr_reader :file, :hashs, :uri
+    
+    def initialize(ps = {})
+      @file = ps[:file] || File.join(File.expand_path("../", __FILE__), "v9KUmP_小学英语会议报名_20170817162821.xls")
+      @hashs = ps[:hashs] || Xls::Parse.new(file: file).to_hash
+      @uri = ps[:uri] || local_uri
+    end
+    
+    def post
+      req = Net::HTTP::Post.new(uri.path, initheader = {"Content-Type" => "application/json", 'Accept' => 'application/json'})
+      req.body = hashs.first.to_json
+      res = Net::HTTP.start(uri.hostname, uri.port) do |http|
+        http.request(req)
+      end
+      
+      # Net::HTTP.post(uri, hashs.first.to_json, { "Content-Type" => 'application/json', 'Accept' => 'application/json'} )
+
+    end
+
+    def local_uri
+      URI("http://localhost:3000/results?pass=6mVjeZGmWni4rrbWZy5kJynwsiLzKN5q")
+    end
+
+  end
+end
