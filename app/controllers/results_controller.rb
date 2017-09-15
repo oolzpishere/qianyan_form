@@ -113,10 +113,6 @@ class ResultsController < ApplicationController
     end
   end
 
-  def json_create_restirct_access
-    
-  end
-
   # def pass
   #   byebug
   #   # format.json { render json: "", status: :unprocessable_entity }

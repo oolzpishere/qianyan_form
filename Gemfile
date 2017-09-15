@@ -44,6 +44,7 @@ group :development, :test do
   # gem 'capistrano3-puma'
 
   gem 'rspec-rails'
+  gem 'rails-controller-testing'
   gem 'guard-rspec', require: false
   gem 'factory_girl_rails'
 

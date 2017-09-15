@@ -42,6 +42,9 @@ RSpec.describe ResultsController, type: :controller do
   # ResultsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
+  # let(:) {
+  # }
+
   describe "GET #index" do
     xit "returns a success response" do
       result = Result.create! valid_attributes
@@ -49,8 +52,13 @@ RSpec.describe ResultsController, type: :controller do
       expect(response).to be_success
     end
 
-    xit "" do
-
+    it "index get all instances" do
+      attr1 = attributes_for(:primary_english_result)
+      attr2 = attributes_for(:primary_english_result)
+      post :create, :params => attr1, :format => :json
+      post :create, :params => attr2, :format => :json
+      get :index, params: {subject: "PrimaryEnglishResult"}
+      expect(assigns(:results).count).to eq(2)
     end
   end
 
