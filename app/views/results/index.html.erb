@@ -3,7 +3,7 @@
 <h5>报名信息</h5>
 <%  @openid_results.each do |result| %>
 
-    <% entry = Entry.new(result).values %>
+    <% entry = Entry.new(result: result).values %>
     <div class="row">
 	<div class="col s12">
 	    <div class="card">
@@ -27,7 +27,7 @@
 			<dt>提交时间：</dt>
 			<dd><%= entry['提交时间'] %></dd>
 			<div class="card-action">
-			    <%= link_to '查看详情', result, class: "waves-effect waves-light btn blue darken-1 white-text" %>
+			    <%= link_to '查看详情',{ controller: "results",action: 'show',id: result,  subject: result.class.name}, class: "waves-effect waves-light btn blue darken-1 white-text" %>
 			</div>
 		    </dl>
 		</div>

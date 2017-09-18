@@ -5,17 +5,30 @@ class Entry
   
   # hd=hash_data
   # [params] Result.any
-  def initialize(result) 
-    @result = result
+  def initialize(ps = {}) 
+    @result = ps[:result]
     @entry = result.entry
-    @form = result.form
-    @form_name = result.form_name
+    form = result.form
+    form_name = result.form_name
     # key_type = eng_key? ? "eng" : "chinese"
-    @file_pair = Xxml::XmlFactory.new().name_pair
+    @file_pair = Xxml::XmlFactory.new(form: form).name_pair
   end
 
   def values
-    eng_key? ? change_name : filter_entry
+    values = eng_key? ? change_name : filter_entry
+    except_hash(values)
+  end
+
+  def except_hash(values)
+    values =  values.except( '微信头像', '微信OpenID', '微信昵称', '微信性别', '微信国家', '微信省市', '修改时间' )
+    reject_empty(values)
+  end
+
+  def reject_empty(values)
+    values.reject { |k,v|
+      ( !v.to_s.match(/\d/) if %w(广西区内报名 广西区外报名).include?(k) ) ||
+        v.to_s.chomp.empty?
+    }
   end
   
   # from {"serial_number" =>123, ... } become {"序号" => 123, ... }

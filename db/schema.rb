@@ -10,7 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170904173854) do
+ActiveRecord::Schema.define(version: 20170918082920) do
+
+  create_table "primary_chinese_results", force: :cascade do |t|
+    t.integer "result_id"
+    t.string "openid"
+    t.string "form"
+    t.string "form_name"
+    t.text "entry"
+    t.string "gen_code"
+    t.datetime "form_created_at"
+    t.datetime "form_updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["form"], name: "index_primary_chinese_results_on_form"
+    t.index ["gen_code"], name: "index_primary_chinese_results_on_gen_code"
+    t.index ["openid"], name: "index_primary_chinese_results_on_openid"
+    t.index ["result_id"], name: "index_primary_chinese_results_on_result_id"
+  end
+
+  create_table "primary_english_competition_results", force: :cascade do |t|
+    t.integer "result_id"
+    t.string "openid"
+    t.string "form"
+    t.string "form_name"
+    t.text "entry"
+    t.string "gen_code"
+    t.datetime "form_created_at"
+    t.datetime "form_updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["form"], name: "index_primary_english_competition_results_on_form"
+    t.index ["gen_code"], name: "index_primary_english_competition_results_on_gen_code"
+    t.index ["openid"], name: "index_primary_english_competition_results_on_openid"
+    t.index ["result_id"], name: "index_primary_english_competition_results_on_result_id"
+  end
 
   create_table "primary_english_results", force: :cascade do |t|
     t.integer "result_id"

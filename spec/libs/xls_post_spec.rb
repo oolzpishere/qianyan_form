@@ -13,7 +13,6 @@ RSpec.describe Xls::Post do
     # expect(@parse.load).to be_an_instance_of(Roo::Excel)
   end
 
-
 end
 
 

@@ -1,0 +1,8 @@
+class CreatePrimaryEnglishCompetitionResults < ActiveRecord::Migration[5.1]
+  def change
+    create_table :primary_english_competition_results do |t|
+
+      t.timestamps
+    end
+  end
+end

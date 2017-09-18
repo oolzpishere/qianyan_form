@@ -7,7 +7,7 @@ class ResultsController < ApplicationController
   # before_action :pass, if: Proc.new { |c| c.request.format = 'application/json'}
   before_action :subject_class, only: [:index, :show, :create]
   USERS = { ENV["QIANYAN_FORM_USER"] => ENV["QIANYAN_FORM_SE"] }
-  
+  wrap_parameters :result, include: [:id, :form, :form_name, :openid, :gen_code, :created_at, :updated_at,:entry]
   # GET /results
   # GET /results.json
   def index
@@ -44,19 +44,22 @@ class ResultsController < ApplicationController
     h = {
       "id" => result_params.dig(:entry, :serial_number) ||  result_params[:id],
       "openid" => result_params.dig(:entry, :x_field_weixin_openid) || result_params[:openid],
-      "gen_code" => result_params.dig(:entry, :gen_code) || result_params[:gen_code]
+      "gen_code" => result_params.dig(:entry, :gen_code) || result_params[:gen_code],
+      "created_at" => result_params.dig(:entry, :created_at) || result_params[:created_at],
+      "updated_at" => result_params.dig(:entry, :updated_at) || result_params[:updated_at]
     }
     
     # @result = Result.new(result_params.merge h)
     
     # subject_pluralize = subject.pluralize
     # @result = Result.find(subject).send(subject_pluralize).new(result_params.merge h)
+
     @result = subject_class.new(result_params.merge h)
     
     respond_to do |format|
       if @result.save
         format.html { redirect_to @result, notice: 'Result was successfully created.' }
-        format.json { render json: "", status: :ok}
+        format.json { render json: "", status: :ok }
       # format.json { render :show, status: :created, location: @result }
       else
         format.html { render :new }
@@ -93,18 +96,18 @@ class ResultsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_result
     # @result = Result.find(params[:id])
-    @result = subject_class(params[:id])
+    @result = subject_class.find(params[:id])
   end
 
   def subject_class
     subject = params[:subject]
-    subject.constantize
+    subject && subject.constantize
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def result_params
     # permit :openid, :gen_code for save it directly
-    params.fetch(:result, {}).permit(:id, :form, :form_name, :openid, :gen_code, :entry => {})
+    params.fetch(:result, {}).permit(:id, :form, :form_name, :openid, :gen_code, :created_at, :updated_at,:entry => {})
   end
 
   def authenticate

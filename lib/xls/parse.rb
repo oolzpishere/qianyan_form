@@ -25,6 +25,18 @@ module Xls
       end
     end
 
+    def important_value(entry)
+      Hash[
+        "id" => entry["序号"].to_i,
+        "form" => form,
+        "form_name" => form_name,
+        "openid" => entry["微信OpenID"],
+        "gen_code" => entry["确认码"].delete(" "),
+        "created_at" => entry["提交时间"],
+        "updated_at" => entry["修改时间"]
+      ]
+    end
+    
     def load
       Roo::Spreadsheet.open(file)
     end
@@ -71,16 +83,6 @@ module Xls
     # def mto_json
     #   to_hash.map { |row| row.to_json }
     # end
-
-    def important_value(entry)
-      Hash[
-        "id" => entry["序号"].to_i,
-        "form" => form,
-        "form_name" => form_name,
-        "openid" => entry["微信OpenID"],
-        "gen_code" => entry["确认码"].delete(" ")
-      ]
-    end
     
     private
     

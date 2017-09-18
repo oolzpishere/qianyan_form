@@ -11,19 +11,20 @@
 		    </thead>
 
 		    <tbody>
-			<%  reject_rows(Entry.new(@result).values).each do |k, v| %>
-			    <% unless v.to_s.chomp.empty? %>
-				<tr>
-				    <td><b><%= "#{k}:"%></b><%= v %></td>
-				</tr>
-			    <% end %>
+			<%#  reject_rows(Entry.new(result: @result).values).each do |k, v| %>
+			<%  Entry.new(result: @result).values.each do |k, v| %>
+			    <%# unless v.to_s.chomp.empty? %>
+			    <tr>
+				<td><b><%= "#{k}:"%></b><%= v %></td>
+			    </tr>
+			    <%# end %>
 			<% end %>
 		    </tbody>
 		</table>
 		
 	    </div>
 	</div>
-	<%= link_to '返回', results_path, class: "waves-effect waves-light btn blue darken-1 white-text" %>
+	<%= link_to '返回', { controller: "results",action: 'index', subject: @result.class.name}, class: "waves-effect waves-light btn blue darken-1 white-text" %>
     </div>
 </div>
 

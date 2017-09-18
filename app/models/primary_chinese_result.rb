@@ -1,0 +1,2 @@
+class PrimaryChineseResult < ApplicationRecord
+end

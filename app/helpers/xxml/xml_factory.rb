@@ -3,7 +3,7 @@ module Xxml
   class XmlFactory
     attr_reader :file_name, :path, :key_type
     def initialize(ps = {})
-      @file_name = 'form_v9KUmP'
+      @file_name = 'form_' + ps[:form]
       @path = ps[:path] || File.join(File.expand_path(  "../", __FILE__ ), file_name)
       # @key_type = ps[:key_type]
     end
@@ -24,7 +24,7 @@ module Xxml
     
     # ["序号", "Float", "serial_number"] > ["序号", "serial_number"]
     def td_array
-      to_h.map {|h| h["td"]}    
+      to_h.map {|h| h["td"]} 
     end
     
     # <tbody> data

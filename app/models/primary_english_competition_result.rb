@@ -1,0 +1,2 @@
+class PrimaryEnglishCompetitionResult < ApplicationRecord
+end
