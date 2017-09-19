@@ -16,18 +16,12 @@
 			<dd><%= entry['序号'] %></dd>
 			<% if entry['广西区内报名'].to_s.match(/\d/) %>
 			    <dt>广西区内报名:</dt>
-			    <dd><%= compact_empty(entry['广西区内报名']) %></dd>
+			    <dd><%= entry['广西区内报名'] %></dd>
 			<% end %>
 			<% if entry['广西区外报名'].to_s.match(/\d/) %>
 			    <dt>广西区外报名:</dt>
-			    <dd><%= compact_empty(entry['广西区外报名']) %></dd>
+			    <dd><%= entry['广西区外报名'] %></dd>
 			<% end %>
-			<% if entry['作品评审费'].to_s.match(/\d/) %>
-			    <dt>作品评审费:</dt>
-			    <dd><%= compact_empty(entry['作品评审费']) %></dd>
-			<% end %>
-			<%# if entry.keys.select { |k| %w(广西区内报名 广西区外报名 作品评审费).include?(k) && entry[k].to_s.match(/\d/) } %>
-			<%# end %>
 			<dt>确认码：</dt>
 			<dd><%= entry['确认码'] %></dd>
 			<dt>提交时间：</dt>
@@ -42,5 +36,7 @@
 	</div>
     </div>
 <% end %>
+
+
 
 <%#= link_to 'New Result', new_result_path %>

@@ -15,7 +15,13 @@
 			<%  Entry.new(result: @result).values.each do |k, v| %>
 			    <%# unless v.to_s.chomp.empty? %>
 			    <tr>
-				<td><b><%= "#{k}:"%></b><%= v %></td>
+				<td><b><%= "#{k}:"%></b>
+				    <% if v.is_a?(Hash) %>
+					<%= compact_empty(v) %>
+				    <% else %>
+					<%= v %>
+				    <% end %>
+				</td>
 			    </tr>
 			    <%# end %>
 			<% end %>

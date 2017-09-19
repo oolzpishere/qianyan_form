@@ -99,6 +99,7 @@ module Xls
     def match_value(keys_array, values_array)
       arr = []
       keys_array.each_with_index do |item, index|
+        # "values_array[index].to_s" change nil to empty string
         value = values_array[index] || values_array[index].to_s
         c = item ? { item => value } : value
         arr << c

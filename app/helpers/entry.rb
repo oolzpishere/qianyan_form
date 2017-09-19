@@ -26,10 +26,11 @@ class Entry
 
   def reject_empty(values)
     values.reject { |k,v|
-      ( !v.to_s.match(/\d/) if %w(广西区内报名 广西区外报名).include?(k) ) ||
-        v.to_s.chomp.empty?
+      ( !v.to_s.match(/\d/) if v.is_a?(Hash) ) || v.to_s.chomp.empty?
     }
   end
+
+  
   
   # from {"serial_number" =>123, ... } become {"序号" => 123, ... }
   # from english name change to chinese name
