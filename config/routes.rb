@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :results
-  resources :page
+  resources :pages
   
   # post 'results/:subject', to: 'results#create'
   

@@ -1,40 +1,15 @@
 <p id="notice"><%= notice %></p>
 
-<h5>报名信息</h5>
-<%  @openid_results.each do |result| %>
+<h1>Pages</h1>
 
-    <% entry = Entry.new(result: result).values %>
-    <div class="row">
-	<div class="col s12">
-	    <div class="card">
-		<div class="card-content">
-		    <span class="card-title"><%= result.form_name %></span>
-		    <dl class="detail" >
-			<dt>	姓名：</dt>
-			<dd><%= entry['姓名']%></dd>
-			<dt>序号: </dt>
-			<dd><%= entry['序号'] %></dd>
-			<% if entry['广西区内报名'].to_s.match(/\d/) %>
-			    <dt>广西区内报名:</dt>
-			    <dd><%= entry['广西区内报名'] %></dd>
-			<% end %>
-			<% if entry['广西区外报名'].to_s.match(/\d/) %>
-			    <dt>广西区外报名:</dt>
-			    <dd><%= entry['广西区外报名'] %></dd>
-			<% end %>
-			<dt>确认码：</dt>
-			<dd><%= entry['确认码'] %></dd>
-			<dt>提交时间：</dt>
-			<dd><%= entry['提交时间'] %></dd>
-			<div class="card-action">
-			    <%= link_to '查看详情',{ controller: "results",action: 'show',id: result,  subject: result.class.name}, class: "waves-effect waves-light btn blue darken-1 white-text" %>
-			</div>
-		    </dl>
-		</div>
+<%= link_to '2017小学英语', {controller: 'results', subject: 'PrimaryEnglishResult'}, class: "waves-effect waves-light btn blue darken-1 white-text" %>
 
-	    </div>
-	</div>
-    </div>
-<% end %>
+<%= link_to '2017小学语文', {controller: 'results', subject: 'PrimaryChineseResult'}, class: "waves-effect waves-light btn blue darken-1 white-text" %>
 
-<%#= link_to 'New Result', new_result_path %>
+<%= link_to '2017小学数学', {controller: 'results', subject: 'PrimaryMathResult'}, class: "waves-effect waves-light btn blue darken-1 white-text" %>
+
+<%= link_to '2017小学英语参赛作品提交', {controller: 'results', subject: 'PrimaryEnglishCompetitionResult'}, class: "waves-effect waves-light btn blue darken-1 white-text" %>
+
+<br>
+
+<%#= link_to 'New Page', new_page_path %>
