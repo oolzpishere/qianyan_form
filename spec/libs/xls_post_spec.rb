@@ -8,10 +8,10 @@ RSpec.describe Xls::Post do
   #   @rows_count = @parse.sheet.last_row - 2
   # end
   
-  xit "load file success, class == Roo::Excel" do
-    byebug
-    # expect(@parse.load).to be_an_instance_of(Roo::Excel)
-  end
+  # it "load file success, class == Roo::Excel" do
+
+  #   # expect(@parse.load).to be_an_instance_of(Roo::Excel)
+  # end
 
 end
 

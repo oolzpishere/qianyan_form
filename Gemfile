@@ -74,6 +74,7 @@ gem 'devise-i18n'
 gem 'cancan' # or cancancan
 
 gem 'materialize-sass'
+gem 'material_icons'
 # gem 'paperclip'
 
 # Use jquery as the JavaScript library
