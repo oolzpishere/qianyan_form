@@ -12,6 +12,7 @@ module Xls
       name = file.split('/').last
       form_names = name.split('_')
       # file name pattern: v9KUmP_小学英语会议报名_20170817162821.xls
+      # file name can't have "" double quote
       # form is form id
       @form = form_names[0]
       @form_name = form_names[1]

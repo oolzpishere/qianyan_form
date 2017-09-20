@@ -2,6 +2,7 @@
 
 <div class="row">
     <div class="col s12">
+	<h5><%= "您尚未提交报名信息，请在“前沿报名”进行提交。"  if @openid_results.count < 1%></h5> 
 	<%  @openid_results.each do |result| %>
 
 	    <% entry = Entry.new(result: result).values %>
