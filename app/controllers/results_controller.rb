@@ -96,11 +96,16 @@ class ResultsController < ApplicationController
   end
 
   def subject_class
-    subjects = %w(PrimaryChineseResult PrimaryEnglishCompetitionResult PrimaryEnglishResult PrimaryMathResult)
-    if subjects.include?(params[:subject])
+      # subjects = %w(PrimaryChineseResult PrimaryEnglishCompetitionResult PrimaryEnglishResult PrimaryMathResult)
+    if subject_names.include?(params[:subject])
       subject = params[:subject] 
       subject && subject.constantize
     end
+  end
+
+  def subject_names
+    Rails.application.eager_load!
+    ActiveRecord::Base.descendants.map(&:name)
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
