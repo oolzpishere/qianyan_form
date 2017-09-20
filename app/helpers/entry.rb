@@ -24,6 +24,7 @@ class Entry
     reject_empty(values)
   end
 
+  # reject empty products
   def reject_empty(values)
     values.reject { |k,v|
       ( !v.to_s.match(/\d/) if v.is_a?(Hash) ) || v.to_s.chomp.empty?

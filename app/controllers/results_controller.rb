@@ -3,16 +3,12 @@ class ResultsController < ApplicationController
   before_action :authenticate, except: [:show, :index, :create]
   before_action :authenticate, only: [:create], if: Proc.new { |c| c.request.format != 'application/json'}
   # before_action :json_create_restirct_access, only: [:create], if: Proc.new { |c| c.request.format = 'application/json'}
-  # test post json have my pass token
-  # before_action :pass, if: Proc.new { |c| c.request.format = 'application/json'}
   before_action :subject_class, only: [:index, :show, :create]
   USERS = { ENV["QIANYAN_FORM_USER"] => ENV["QIANYAN_FORM_SE"] }
   wrap_parameters :result, include: [:id, :form, :form_name, :openid, :gen_code, :created_at, :updated_at,:entry]
   # GET /results
   # GET /results.json
   def index
-    # subjects = %w( english math )
-    
     # constantize(type).order(id: :desc).all if subjects.include?(subject)
     @results = subject_class.order(id: :desc).all
     # @results = Result.order(id: :desc).all
@@ -100,8 +96,11 @@ class ResultsController < ApplicationController
   end
 
   def subject_class
-    subject = params[:subject]
-    subject && subject.constantize
+    subjects = %w(PrimaryChineseResult PrimaryEnglishCompetitionResult PrimaryEnglishResult PrimaryMathResult)
+    if subjects.include?(params[:subject])
+      subject = params[:subject] 
+      subject && subject.constantize
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
