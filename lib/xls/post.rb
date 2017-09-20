@@ -5,9 +5,9 @@ module Xls
 
     attr_reader :file, :file_path,:hashs, :uri, :pass, :subject
     
-    # params need: file, uri, subject(CamelCase class)
+    # params need: file, url, subject(CamelCase class)
     def initialize(ps = {})
-      @file_path = ps[:file] || File.join(File.expand_path("../files", __FILE__), "v9KUmP_小学英语会议报名_20170817162821.xls")
+      @file_path = ps[:file] || File.join(File.expand_path("../files", __FILE__), "_v9KUmP_小学英语会议报名_20170817162821.xls")
       @hashs = Xls::Parse.new(file: file_path).to_hash
       url = ps[:url] || "http://localhost:3000/results"
       @uri =  gen_uri(url)
@@ -20,7 +20,7 @@ module Xls
       ranged_hashs = hashs[range]
       ranged_hashs.each do |row|
         req = Net::HTTP::Post.new( uri.path, initheader = {"Content-Type" => "application/json", 'Accept' => 'application/json'} ) 
-        req.body =  row.merge({'pass' => pass, 'subject' => subject}) .to_json
+        req.body =  row.merge({'pass' => pass, 'subject' => subject}).to_json
         res = Net::HTTP.start(uri.hostname, uri.port) do |http|
           http.request(req)
         end

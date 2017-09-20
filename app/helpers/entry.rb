@@ -20,14 +20,14 @@ class Entry
   end
 
   def except_hash(values)
-    values =  values.except( '微信头像', '微信OpenID', '微信昵称', '微信性别', '微信国家', '微信省市', '修改时间' )
+    values =  values.except( '提交人', '微信头像', '微信OpenID', '微信昵称', '微信性别', '微信国家', '微信省市', '修改时间' )
     reject_empty(values)
   end
 
   # reject empty products
   def reject_empty(values)
     values.reject { |k,v|
-      ( !v.to_s.match(/\d/) if v.is_a?(Hash) ) || v.to_s.chomp.empty?
+      ( !v.to_s.match(/\d/) if v.is_a?(Hash) || v.is_a?(Array) ) || v.to_s.chomp.empty?
     }
   end
 

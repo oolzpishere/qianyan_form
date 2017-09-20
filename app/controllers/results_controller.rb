@@ -11,7 +11,6 @@ class ResultsController < ApplicationController
   def index
     # constantize(type).order(id: :desc).all if subjects.include?(subject)
     @results = subject_class.order(id: :desc).all
-    # @results = Result.order(id: :desc).all
     @openid_results = @results#.select {|result| result.openid == session[:openid]}
   end
 
