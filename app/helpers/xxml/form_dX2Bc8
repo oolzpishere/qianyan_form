@@ -95,11 +95,6 @@
                   <td>field_21</td>
                 </tr>
                 <tr>
-                  <td>备注</td>
-                  <td>String</td>
-                  <td>field_24</td>
-                </tr>
-                <tr>
                   <td>付费方式</td>
                   <td>String</td>
                   <td>field_26</td>
@@ -113,6 +108,16 @@
                   <td>广西区外报名</td>
                   <td>Array</td>
                   <td>field_40</td>
+                </tr>
+                <tr>
+                  <td>光盘预订</td>
+                  <td>Array</td>
+                  <td>field_44</td>
+                </tr>
+                <tr>
+                  <td>备注</td>
+                  <td>String</td>
+                  <td>field_24</td>
                 </tr>
                 <tr>
                   <td>确认码</td>

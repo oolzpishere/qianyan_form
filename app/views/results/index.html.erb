@@ -48,6 +48,13 @@
 				    </td>
 				</tr>
 			    <% end %>
+			    <% if entry['光盘预订'].to_s.match(/\d/) %>
+				<tr>				
+				    <td>
+					<b>光盘预订: </b><%= compact_empty(entry['光盘预订']) %>
+				    </td>
+				</tr>
+			    <% end %>
 			    <tr>
 				<td>
 				    <b>确认码: </b><%= entry['确认码']%>
