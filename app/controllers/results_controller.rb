@@ -33,32 +33,45 @@ class ResultsController < ApplicationController
   def create
     # like: http://localhost:3000/results?pass=ENV["QIANYAN_FORM_PASS"]
     unless params[:pass] == ENV["QIANYAN_FORM_PASS"]
-      return render json: {'fail':'need pass'}.to_json, status: :bad_request 
+      return render json: {'fail':'need pass'}.to_json, status: :bad_request
     end
-    
-    h = {
+
+    hash = {
       "id" => result_params.dig(:entry, :serial_number) ||  result_params[:id],
       "openid" => result_params.dig(:entry, :x_field_weixin_openid) || result_params[:openid],
       "gen_code" => result_params.dig(:entry, :gen_code) || result_params[:gen_code],
       "created_at" => result_params.dig(:entry, :created_at) || result_params[:created_at],
       "updated_at" => result_params.dig(:entry, :updated_at) || result_params[:updated_at]
     }
-    
+
     # @result = Result.new(result_params.merge h)
-    
+
     # subject_pluralize = subject.pluralize
     # @result = Result.find(subject).send(subject_pluralize).new(result_params.merge h)
 
-    @result = subject_class.new(result_params.merge h)
-    
-    respond_to do |format|
-      if @result.save
-        format.html { redirect_to @result, notice: 'Result was successfully created.' }
-        format.json { render json: "", status: :ok }
-      # format.json { render :show, status: :created, location: @result }
-      else
-        format.html { render :new }
-        format.json { render json: @result.errors, status: :unprocessable_entity }
+    result_params_merged = result_params.merge hash
+    if subject_class.exists?(hash["id"])
+      @result = subject_class.find(hash["id"])
+      respond_to do |format|
+        if @result.update(result_params_merged)
+          format.html { redirect_to @result, notice: 'Result was successfully updated.' }
+          format.json { render json: "", status: :ok }
+        else
+          format.html { render :edit }
+          format.json { render json: @result.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      @result = subject_class.new(result_params_merged)
+      respond_to do |format|
+        if @result.save
+          format.html { redirect_to @result, notice: 'Result was successfully created.' }
+          format.json { render json: "", status: :ok }
+        # format.json { render :show, status: :created, location: @result }
+        else
+          format.html { render :new }
+          format.json { render json: @result.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -97,7 +110,7 @@ class ResultsController < ApplicationController
   def subject_class
       # subjects = %w(PrimaryChineseResult PrimaryEnglishCompetitionResult PrimaryEnglishResult PrimaryMathResult)
     if subject_names.include?(params[:subject])
-      subject = params[:subject] 
+      subject = params[:subject]
       subject && subject.constantize
     end
   end
