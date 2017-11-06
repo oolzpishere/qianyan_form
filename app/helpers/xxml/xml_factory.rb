@@ -3,7 +3,7 @@ module Xxml
   class XmlFactory
     attr_reader :file_name, :path, :key_type
     def initialize(ps = {})
-      @file_name = 'form_' + ps[:form]
+      @file_name = 'form_' + ps[:form] if ps[:form]
       @path = ps[:path] || File.join(File.expand_path(  "../", __FILE__ ), file_name)
       # @key_type = ps[:key_type]
     end
@@ -24,7 +24,7 @@ module Xxml
     end
 
     def td_array
-      to_h.map {|h| h["td"]}
+      to_h(xml_data).map {|h| h["td"]}
     end
 
     # <tbody> data
@@ -35,8 +35,8 @@ module Xxml
     end
 
     # get tds hash[{"td"=>["序号", "Float", "serial_number"]}, {"td"=>["总价", "Float", "total_price"]}]
-    def to_h
-      h = Hash.from_xml(xml_data)
+    def to_h(data)
+      h = Hash.from_xml(data)
       h.dig("tbody","tr")
     end
   end
