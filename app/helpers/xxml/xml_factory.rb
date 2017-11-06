@@ -12,21 +12,21 @@ module Xxml
     def name_pair
       reverse_array_item.to_h
     end
-    
+
     def reverse_array_item
       delete_center.map {|arr| arr.reverse}
     end
-    
+
     # delete change the source
+    # ["序号", "Float", "serial_number"] > ["序号", "serial_number"]
     def delete_center
       td_array.each {|td| td.delete_at(1)}
     end
-    
-    # ["序号", "Float", "serial_number"] > ["序号", "serial_number"]
+
     def td_array
-      to_h.map {|h| h["td"]} 
+      to_h.map {|h| h["td"]}
     end
-    
+
     # <tbody> data
     def xml_data
       data = ""
