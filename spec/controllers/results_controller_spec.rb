@@ -10,7 +10,7 @@ RSpec.describe ResultsController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Result. As you add validations to Result, be sure to
   # adjust the attributes here as well.
-  
+
   # let(:valid_attributes) {
   #   skip("Add a hash of attributes valid for your model")
   # }
@@ -31,7 +31,7 @@ RSpec.describe ResultsController, type: :controller do
       post :create, :params => attr1, :format => :json
       post :create, :params => attr2, :format => :json
     end
-    
+
     it "returns a success response" do
       # result = Result.create! valid_attributes
       get :index, params: {subject: "PrimaryEnglishResult"}, session: valid_session
@@ -51,7 +51,7 @@ RSpec.describe ResultsController, type: :controller do
       post :create, :params => attr1, :format => :json
       @result = subject_class.camelize.constantize.order(id: :desc).first
     end
-    
+
     it "returns a success response" do
       # result = Result.create! valid_attributes
       get :show, params: {subject: "PrimaryEnglishResult", id: @result.to_param}, session: valid_session
@@ -79,9 +79,9 @@ RSpec.describe ResultsController, type: :controller do
       it "create success with pass and subject" do
         attr = attributes_for(:primary_english_result)
         # post :create, :params => attr, :format => :json
-        expect {post :create, :params => attr, :format => :json }.to change { PrimaryEnglishResult.count }.by(1)
+        expect { post :create, :params => attr, :format => :json }.to change { PrimaryEnglishResult.count }.by(1)
       end
-      
+
       # xit "creates a new Result" do
       #   expect {
       #     post :create, params: {result: valid_attributes}, session: valid_session

@@ -46,7 +46,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rails-controller-testing'
   gem 'guard-rspec', require: false
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
 
   gem 'awesome_print'
   gem 'better_errors'
