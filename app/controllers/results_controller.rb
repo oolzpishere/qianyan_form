@@ -110,7 +110,7 @@ class ResultsController < ApplicationController
   def subject_class
       # subjects = %w(PrimaryChineseResult PrimaryEnglishCompetitionResult PrimaryEnglishResult PrimaryMathResult)
     if subject_names.include?(params[:subject])
-      subject = params[:subject]
+      subject = params[:subject].camelize
       subject && subject.constantize
     end
   end

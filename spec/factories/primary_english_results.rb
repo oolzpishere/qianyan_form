@@ -1,5 +1,5 @@
 # coding: utf-8
-FactoryGirl.define do
+FactoryBot.define do
   factory :primary_english_result do
     entry { {"序号"=>"30",
              "总价"=>0.04,

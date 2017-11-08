@@ -1,5 +1,5 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :primary_math_result do
-    
+
   end
 end
