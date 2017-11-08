@@ -26,10 +26,10 @@ RSpec.describe ResultsController, type: :controller do
 
   describe "GET #index" do
     before(:example) do
-      attr1 = attributes_for(:primary_english_result)
-      attr2 = attributes_for(:primary_english_result)
-      post :create, :params => attr1, :format => :json
-      post :create, :params => attr2, :format => :json
+      result1 = create(:primary_english_result)
+      result2 = create(:primary_english_result)
+      # post :create, :params => attr1, :format => :json
+      # post :create, :params => attr2, :format => :json
     end
 
     it "returns a success response" do
@@ -47,8 +47,7 @@ RSpec.describe ResultsController, type: :controller do
   describe "GET #show" do
     before(:example) do
       subject_class =  "primary_english_result"
-      attr1 = attributes_for(subject_class)
-      post :create, :params => attr1, :format => :json
+      create(:primary_english_result)
       @result = subject_class.camelize.constantize.order(id: :desc).first
     end
 
@@ -77,7 +76,8 @@ RSpec.describe ResultsController, type: :controller do
   describe "POST #create" do
     context "with valid params" do
       it "create success with pass and subject" do
-        attr = attributes_for(:primary_english_result)
+        extra = {subject: "PrimaryEnglishResult", pass:  ENV["QIANYAN_FORM_PASS"] }
+        attr = attributes_for(:primary_english_result).merge(extra)
         # post :create, :params => attr, :format => :json
         expect { post :create, :params => attr, :format => :json }.to change { PrimaryEnglishResult.count }.by(1)
       end

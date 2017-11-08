@@ -44,7 +44,7 @@ FactoryBot.define do
     form_name "小学英语会议报名"
     openid "o3jBmt91YRMtZDvZZk-96C20jhSg"
     gen_code "53980547"
-    subject "PrimaryEnglishResult"
-    pass { ENV["QIANYAN_FORM_PASS"] }
+    #subject "PrimaryEnglishResult"
+    #pass { ENV["QIANYAN_FORM_PASS"] }
   end
 end
