@@ -11,7 +11,7 @@ class ResultsController < ApplicationController
   def index
     # constantize(type).order(id: :desc).all if subjects.include?(subject)
     @results = subject_class.order(id: :desc).all
-    @openid_results = @results.select {|result| result.openid == session[:openid]} if Rails.env.match(/production/)
+    @openid_results = Rails.env.match(/production/) ? @results.select {|result| result.openid == session[:openid]} : @results
   end
 
   # GET /results/1

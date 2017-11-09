@@ -32,6 +32,7 @@ RSpec.describe ResultsController, type: :controller do
       # post :create, :params => attr2, :format => :json
     end
 
+
     it "returns a success response" do
       # result = Result.create! valid_attributes
       get :index, params: {subject: "PrimaryEnglishResult"}, session: valid_session
@@ -40,7 +41,7 @@ RSpec.describe ResultsController, type: :controller do
 
     it "index get all instances" do
       get :index, params: {subject: "PrimaryEnglishResult"}
-      expect(assigns(:results).count).to eq(2)
+      expect(assigns(:openid_results).count).to eq(2)
     end
   end
 

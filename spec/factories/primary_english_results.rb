@@ -42,7 +42,7 @@ FactoryBot.define do
     sequence(:id)
     form "v9KUmP"
     form_name "小学英语会议报名"
-    openid "o3jBmt91YRMtZDvZZk-96C20jhSg"
+    openid "openid"
     gen_code "53980547"
     #subject "PrimaryEnglishResult"
     #pass { ENV["QIANYAN_FORM_PASS"] }

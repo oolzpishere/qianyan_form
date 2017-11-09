@@ -2,11 +2,11 @@
 
 <div class="row">
     <div class="col s12">
-	<h5><%= "您尚未提交报名信息，请在“前沿报名”进行提交。"  if @openid_results.count < 1%></h5> 
+	<h5><%= "您尚未提交报名信息，请在“前沿报名”进行提交。"  if @openid_results.count < 1%></h5>
 	<%  @openid_results.each do |result| %>
-
 	    <% entry = Entry.new(result: result).values %>
-
+      <% names = %w(姓名 序号 确认码 提交时间) %>
+      <% %w(广西区内报名 广西区外报名 作品评审费 光盘预订).each {|name| names << name if entry[name].to_s.match(/\d/) } %>
 	    <div class="card">
 		<div class="card-content">
 		    <table class="striped">
@@ -17,54 +17,14 @@
 			</thead>
 
 			<tbody>
+        <% names.each do |name| %>
 			    <tr>
 				<td>
-				    <b>姓名：</b><%= entry['姓名']%>
+				    <%= tag.b("#{name}:") %>
+            <%= compact_empty(entry[name])%>
 				</td>
 			    </tr>
-			    <tr>
-				<td>
-				    <b>序号: </b><%= entry['序号']%>
-				</td>
-			    </tr>
-			    <% if entry['广西区内报名'].to_s.match(/\d/) %>
-				<tr>	
-				    <td>
-					<b>广西区内报名: </b><%= compact_empty(entry['广西区内报名']) %>
-				    </td>
-				</tr>
-			    <% end %>
-			    <% if entry['广西区外报名'].to_s.match(/\d/) %>
-				<tr>
-				    <td>
-					<b>广西区外报名: </b><%= compact_empty(entry['广西区外报名']) %>
-				    </td>
-				</tr>
-			    <% end %>
-			    <% if entry['作品评审费'].to_s.match(/\d/) %>
-				<tr>				
-				    <td>
-					<b>作品评审费: </b><%= compact_empty(entry['作品评审费']) %>
-				    </td>
-				</tr>
-			    <% end %>
-			    <% if entry['光盘预订'].to_s.match(/\d/) %>
-				<tr>				
-				    <td>
-					<b>光盘预订: </b><%= compact_empty(entry['光盘预订']) %>
-				    </td>
-				</tr>
-			    <% end %>
-			    <tr>
-				<td>
-				    <b>确认码: </b><%= entry['确认码']%>
-				</td>
-			    </tr>
-			    <tr>
-				<td>
-				    <b>提交时间: </b><%= entry['提交时间']%>
-				</td>
-			    </tr>
+          <% end %>
 			</tbody>
 		    </table>
 
