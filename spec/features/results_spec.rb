@@ -7,8 +7,8 @@ describe "the signin process", :type => :feature do
     create(:primary_english_result)
   end
 
-  let(:attr1) do
-    attributes_for(:primary_english_result)
+  let(:entry1) do
+    attributes_for(:primary_english_result).dig(:entry)
   end
 
 
@@ -20,18 +20,14 @@ describe "the signin process", :type => :feature do
     visit "/results?subject=#{subject}"
     %w(姓名 序号 确认码 提交时间).each do |name|
       expect(page).to have_content(name)
-      expect(page).to have_content(attr1[name])
+      expect(page).to have_content(entry1[name])
     end
-  end
-
-  it "sold product" do
     %w(广西区内报名 广西区外报名 作品评审费 光盘预订).each do |name|
-      if attr1[name].to_s.match(/\d/)
+      if entry1[name].to_s.match(/\d/)
         expect(page).to have_content(name)
-        expect(page).to have_content(attr1[name])
       end
     end
-
   end
+
 
 end
