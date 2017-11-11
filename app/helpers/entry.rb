@@ -7,9 +7,9 @@ class Entry
   # [params] Result.any
   def initialize(ps = {})
     @result = ps[:result]
-    @entry = result.entry
-    form = result.form
-    form_name = result.form_name
+    @entry = result[:entry]
+    form = result[:form]
+    form_name = result[:form_name]
     # key_type = eng_key? ? "eng" : "chinese"
     @file_pair = Xxml::XmlFactory.new(form: form).name_pair
   end
