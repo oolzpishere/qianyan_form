@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170918082920) do
+ActiveRecord::Schema.define(version: 20171113173922) do
+
+  create_table "junior_english_results", force: :cascade do |t|
+    t.integer "result_id"
+    t.string "openid"
+    t.string "form"
+    t.string "form_name"
+    t.text "entry"
+    t.string "gen_code"
+    t.datetime "form_created_at"
+    t.datetime "form_updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["form"], name: "index_junior_english_results_on_form"
+    t.index ["gen_code"], name: "index_junior_english_results_on_gen_code"
+    t.index ["openid"], name: "index_junior_english_results_on_openid"
+    t.index ["result_id"], name: "index_junior_english_results_on_result_id"
+  end
 
   create_table "primary_chinese_results", force: :cascade do |t|
     t.integer "result_id"
@@ -86,6 +103,23 @@ ActiveRecord::Schema.define(version: 20170918082920) do
     t.datetime "form_updated_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "senior_english_results", force: :cascade do |t|
+    t.integer "result_id"
+    t.string "openid"
+    t.string "form"
+    t.string "form_name"
+    t.text "entry"
+    t.string "gen_code"
+    t.datetime "form_created_at"
+    t.datetime "form_updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["form"], name: "index_senior_english_results_on_form"
+    t.index ["gen_code"], name: "index_senior_english_results_on_gen_code"
+    t.index ["openid"], name: "index_senior_english_results_on_openid"
+    t.index ["result_id"], name: "index_senior_english_results_on_result_id"
   end
 
   create_table "users", force: :cascade do |t|

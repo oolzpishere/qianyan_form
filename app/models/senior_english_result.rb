@@ -1,0 +1,2 @@
+class SeniorEnglishResult < ApplicationRecord
+end

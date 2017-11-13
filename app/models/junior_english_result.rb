@@ -1,0 +1,2 @@
+class JuniorEnglishResult < ApplicationRecord
+end
