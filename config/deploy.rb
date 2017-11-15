@@ -48,7 +48,10 @@ set :migration_servers, -> { primary(fetch(:migration_role)) }
 
 # Defaults to false
 # Skip migration if files in db/migrate were not modified
-set :conditionally_migrate, true
+# set :conditionally_migrate, true
+# require 'capistrano/rails/migrations' if ENV['RUN_MIGRATIONS']
+# RUN_MIGRATIONS=1 bundle exec cap production deploy:migrate
+
 
 # Defaults to nil (no asset cleanup is performed)
 # If you use Rails 4+ and you'd like to clean up old assets after each deploy,
