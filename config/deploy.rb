@@ -6,10 +6,10 @@ set :repo_url, "https://github.com/oolzpishere/qianyan_form.git"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
-# set :branch, "v1.01"
+set :branch, "v1.01"
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, "/var/www/rails/qianyan_form"
+set :deploy_to, "/var/www/rails/#{fetch(:application)}"
 # set :deploy_to, "/var/www/my_app_name"
 
 # Default value for :format is :airbrussh.
@@ -36,3 +36,21 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+
+# If the environment differs from the stage name
+set :rails_env, 'production'
+
+# Defaults to :db role
+set :migration_role, :app
+
+# Defaults to the primary :db server
+set :migration_servers, -> { primary(fetch(:migration_role)) }
+
+# Defaults to false
+# Skip migration if files in db/migrate were not modified
+set :conditionally_migrate, true
+
+# Defaults to nil (no asset cleanup is performed)
+# If you use Rails 4+ and you'd like to clean up old assets after each deploy,
+# set this to the number of versions to keep
+set :keep_assets, 2
