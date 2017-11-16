@@ -1,6 +1,4 @@
 describe "results features", :type => :feature do
-
-
   describe "index test" do
     let(:attr1) do
       attributes_for(:primary_english_result)
