@@ -7,10 +7,15 @@ class PagesController < ApplicationController
 
   end
 
-  # # GET /pages/1
-  # # GET /pages/1.json
-  # def show
-  # end
+  # GET /pages/1
+  # GET /pages/1.json
+  def show
+    if params[:path] == 'eng'
+      view_file = params[:path]
+
+      render view_file and return if lookup_context.exists?(view_file, 'pages')
+    end
+  end
 
   # # GET /pages/new
   # def new
