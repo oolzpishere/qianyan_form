@@ -3,16 +3,16 @@
 module Xls
   class Post
 
-    attr_reader :file_path,:hashs, :uri, :pass, :subject
+    attr_reader :file,:hashs, :uri, :pass, :subject
 
-    # params: { file, url, subject(class name with CamelCase string)}
-    def initialize(ps = {})
-      @file_path = ps[:file] || File.join(File.expand_path("../files", __FILE__), "_v9KUmP_小学英语会议报名_20170817162821.xls")
-      @hashs = Xls::Parse.new(file: file_path).to_hash
-      url = ps[:url] || "http://localhost:3000/results"
+    # new(file, url, subject(class name:CamelCase))
+    def initialize(file, url, subject)
+      @file = file || File.join(File.expand_path("../files", __FILE__), "_v9KUmP_小学英语会议报名_20170817162821.xls")
+      url = url || "http://localhost:3000/results"
       @pass = ENV["QIANYAN_FORM_PASS"]
-      @subject = ps[:subject]
+      @subject = subject.camelize
       @uri =  gen_uri(url)
+      @hashs = Xls::Parse.new(file: @file).to_hash
     end
 
     def post(range = 0..-1)

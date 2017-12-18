@@ -7,12 +7,23 @@ RSpec.describe Xls::Post do
   #   @parse = Xls::Parse.new(file: file_name)
   #   @rows_count = @parse.sheet.last_row - 2
   # end
-  
-  # it "load file success, class == Roo::Excel" do
+  let(:file) { "file" }
+  let(:url) {"url"}
+  let(:subject) { "subject" }
 
-  #   # expect(@parse.load).to be_an_instance_of(Roo::Excel)
-  # end
+  before(:example) {
+    @post = Xls::Post.new(file, url, subject)
+  }
 
+  it "test params correct" do
+    # post = instance_double(Xls::Post)
+    expect(@post.file).to eq("file")
+    expect(@post.url).to eq("url")
+    expect(@post.subject).to eq("Subject")
+  end
+
+  it "test post" do
+    expect(@post).to receive(:post).with(0..-1)
+    @post.post(0..-1)
+  end
 end
-
-
