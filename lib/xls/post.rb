@@ -3,7 +3,7 @@
 module Xls
   class Post
 
-    attr_reader :file,:hashs, :uri, :pass, :subject
+    attr_reader :file, :uri, :pass, :subject
 
     # new(file, url, subject(class name:CamelCase))
     def initialize(file, url, subject)
@@ -12,7 +12,6 @@ module Xls
       @pass = ENV["QIANYAN_FORM_PASS"]
       @subject = subject.camelize
       @uri =  gen_uri(url)
-      @hashs = Xls::Parse.new(file: @file).to_hash
     end
 
     def post(range = 0..-1)
@@ -26,6 +25,10 @@ module Xls
         end
       end
       # Net::HTTP.post( uri, hashs.first.to_json, { "Content-Type" => 'application/json', 'Accept' => 'application/json'} )
+    end
+
+    def hashs
+      Xls::Parse.new(file: @file).to_hash
     end
 
     def gen_uri(url)

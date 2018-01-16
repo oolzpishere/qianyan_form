@@ -9,21 +9,22 @@ RSpec.describe Xls::Post do
   # end
   let(:file) { "file" }
   let(:url) {"url"}
-  let(:subject) { "subject" }
+  let(:subject) { "test_subject" }
 
   before(:example) {
-    @post = Xls::Post.new(file, url, subject)
+    # @post = Xls::Post.new(file, url, subject)
+    @post = double('Xls::Post')
   }
 
   it "test params correct" do
     # post = instance_double(Xls::Post)
-    expect(@post.file).to eq("file")
-    expect(@post.url).to eq("url")
-    expect(@post.subject).to eq("Subject")
+    post = Xls::Post.new(file, url, subject)
+
+    expect(post.file).to eq("file")
+    expect(post.uri).to eq( post.gen_uri("url") )
+    expect(post.subject).to eq("TestSubject")
   end
 
   it "test post" do
-    expect(@post).to receive(:post).with(0..-1)
-    @post.post(0..-1)
   end
 end
