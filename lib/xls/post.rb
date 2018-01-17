@@ -33,7 +33,7 @@ module Xls
 
     def gen_uri(url)
       uri = URI( url )
-      uri.query=( {pass: pass, subject: subject}.to_query )
+      uri.query = ( {pass: pass, subject: subject}.to_query )
       uri
     end
 
