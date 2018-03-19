@@ -3,6 +3,7 @@ class CreatePrimaryEnglishCompetitionResults < ActiveRecord::Migration[5.1]
     create_table :primary_english_competition_results do |t|
       t.belongs_to :result, index: true
       t.string :openid
+      t.string :unionid
       t.string :form
       t.string :form_name
       t.text :entry
@@ -14,6 +15,7 @@ class CreatePrimaryEnglishCompetitionResults < ActiveRecord::Migration[5.1]
     end
 
     add_index :primary_english_competition_results, :openid
+    add_index :primary_english_competition_results, :unionid
     add_index :primary_english_competition_results, :form
     add_index :primary_english_competition_results, :gen_code
   end
