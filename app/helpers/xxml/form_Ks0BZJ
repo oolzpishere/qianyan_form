@@ -90,7 +90,7 @@
                   <td>field_26</td>
                 </tr>
                 <tr>
-                  <td>线上报名</td>
+                  <td>广西区外报名</td>
                   <td>Array</td>
                   <td>field_25</td>
                 </tr>
@@ -103,6 +103,36 @@
                   <td>确认码</td>
                   <td>String</td>
                   <td>gen_code</td>
+                </tr>
+                <tr>
+                  <td>微信昵称</td>
+                  <td>String</td>
+                  <td>x_field_weixin_nickname</td>
+                </tr>
+                <tr>
+                  <td>微信性别</td>
+                  <td>String</td>
+                  <td>x_field_weixin_gender</td>
+                </tr>
+                <tr>
+                  <td>微信国家</td>
+                  <td>String</td>
+                  <td>x_field_weixin_country</td>
+                </tr>
+                <tr>
+                  <td>微信省市</td>
+                  <td>Hash</td>
+                  <td>x_field_weixin_province_city</td>
+                </tr>
+                <tr>
+                  <td>微信OpenID</td>
+                  <td>String</td>
+                  <td>x_field_weixin_openid</td>
+                </tr>
+                <tr>
+                  <td>微信头像</td>
+                  <td>String</td>
+                  <td>x_field_weixin_headimgurl</td>
                 </tr>
                 <tr>
                   <td>提交人</td>
