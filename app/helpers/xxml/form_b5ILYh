@@ -25,6 +25,11 @@
                   <td>payment_method</td>
                 </tr>
                 <tr>
+                  <td>发票号</td>
+                  <td>String</td>
+                  <td>field_45</td>
+                </tr>
+                <tr>
                   <td>省/自治区/直辖市</td>
                   <td>String</td>
                   <td>field_38</td>
@@ -77,7 +82,7 @@
                 <tr>
                   <td>个人/团体</td>
                   <td>String</td>
-                  <td>field_31</td>
+                  <td>field_46</td>
                 </tr>
                 <tr>
                   <td>参会人数</td>
@@ -100,19 +105,9 @@
                   <td>field_26</td>
                 </tr>
                 <tr>
-                  <td>广西区内报名</td>
+                  <td>线上报名</td>
                   <td>Array</td>
                   <td>field_25</td>
-                </tr>
-                <tr>
-                  <td>广西区外报名</td>
-                  <td>Array</td>
-                  <td>field_40</td>
-                </tr>
-                <tr>
-                  <td>光盘预订</td>
-                  <td>Array</td>
-                  <td>field_44</td>
                 </tr>
                 <tr>
                   <td>备注</td>
