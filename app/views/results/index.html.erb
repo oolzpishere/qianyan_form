@@ -6,7 +6,7 @@
 	<%  @openid_results.each do |result| %>
 	    <% entry = Entry.new(result: result).values %>
       <% names = %w(姓名 序号 确认码 提交时间) %>
-      <% %w(广西区内报名 广西区外报名 作品评审费 光盘预订).each {|name| names << name if entry[name].to_s.match(/\d/) } %>
+      <% %w(广西区内报名 广西区外报名 作品评审费 光盘征订).each {|name| names << name if entry[name].to_s.match(/\d/) } %>
 	    <div class="card">
 		<div class="card-content">
 		    <table class="striped">
