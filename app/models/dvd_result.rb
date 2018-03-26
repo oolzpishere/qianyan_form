@@ -1,0 +1,2 @@
+class DvdResult < ApplicationRecord
+end
